@@ -4,8 +4,8 @@ pipeline {
        IMAGE_NAME = "flaskwebapp"
        IMAGE_TAG = "latest"
 //       PORT_EXPOSED = "80" à paraméter dans le job
-       STAGING = "${ID_DOCKER}-staging"
-       PRODUCTION = "${ID_DOCKER}-production"
+       STAGING = "${ID_DOCKER}-staging-flask"
+       PRODUCTION = "${ID_DOCKER}-production-flask"
      }
      agent none
      stages {
