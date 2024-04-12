@@ -18,4 +18,4 @@ WORKDIR /opt/webapp
 # EXPOSE 5000
 
 # Exécutez l'application avec gunicorn
-CMD /opt/venv/bin/gunicorn --bind 0.0.0.0:$PORT main:app
+CMD . /opt/venv/bin/activate && gunicorn --bind 0.0.0.0:$PORT main:app
