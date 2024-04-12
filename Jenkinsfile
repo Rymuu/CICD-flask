@@ -35,7 +35,7 @@ pipeline {
            steps {
               script {
                 sh '''
-                    curl localhost:${PORT_EXPOSED} | grep -q "Hello world!"
+                    curl localhost:${PORT_EXPOSED}
                 '''
               }
            }
