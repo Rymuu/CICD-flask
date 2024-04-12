@@ -1,15 +1,14 @@
-#Grab the latest alpine image
-FROM alpine:latest
+#Grab a python image
+FROM python:3.9-slim-bullseye
 
-# Install python and pip
-RUN apk add --no-cache --update python3 py3-pip bash
-ADD requirements.txt /tmp/requirements.txt
+# Install python and pip using venv
+RUN python3 -m venv /opt/venv
+COPY requirements.txt /tmp/requirements.txt
 
-# Install dependencies
-RUN pip3 install --no-cache-dir -q -r /tmp/requirements.txt
+RUN . /opt/venv/bin/activate && pip install --no-cache-dir -q -r /tmp/requirements.txt
 
 # Add our code
-ADD . /opt/webapp/
+copy . /opt/webapp/
 WORKDIR /opt/webapp
 
 # Expose is NOT supported by Heroku
