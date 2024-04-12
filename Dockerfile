@@ -2,8 +2,8 @@
 FROM python:3.9-slim-bullseye
 
 # Créez un environnement virtuel
-RUN python3 -m venv /opt/venv
-ENV VIRTUAL_ENV /opt/env                    
+RUN python3 -m venv env
+ENV VIRTUAL_ENV /env                    
 ENV PATH /env/bin:$PATH 
 
 # Copiez le fichier requirements.txt
