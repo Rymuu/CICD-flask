@@ -1,23 +1,20 @@
-# Utilisez une image Python plus récente (3.9-slim-bullseye)
+# Use a more recent Python image (3.9-slim-bullseye)
 FROM python:3.9-slim-bullseye
 
-# Créez un environnement virtuel
-RUN python3 -m venv env
-ENV VIRTUAL_ENV /env                    
-ENV PATH /env/bin:$PATH 
+# Create a virtual environment
+RUN python3 -m venv /env
+ENV VIRTUAL_ENV /env
+ENV PATH /env/bin:$PATH
 
-# Copiez le fichier requirements.txt
+# Copy the requirements.txt file
 COPY requirements.txt /tmp/requirements.txt
 
-# Installez les dépendances dans l'environnement virtuel
+# Install dependencies inside the virtual environment
 RUN pip install --no-cache-dir -q -r /tmp/requirements.txt
 
-# Ajoutez votre code
+# Add your code
 COPY . /opt/webapp/
 WORKDIR /opt/webapp
 
-# Exposez le port (pas nécessaire pour Heroku)
-# EXPOSE 5000
-
-# Exécutez l'application avec gunicorn
-CMD gunicorn --bind 0.0.0.0:$PORT main:app
+# Execute the application with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:$PORT", "main:app"]
