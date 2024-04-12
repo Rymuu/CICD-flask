@@ -1,27 +1,20 @@
-# syntax=docker/dockerfile:1
+#Grab the latest alpine image
+FROM python:3.13.0a2-alpine
 
-FROM golang:1.19
+# Install python and pip
+RUN apk add --no-cache --update python3 py3-pip bash
+ADD requirements.txt /tmp/requirements.txt
 
-# Set destination for COPY
-WORKDIR /app
+# Install dependencies
+RUN pip3 install --no-cache-dir -q -r /tmp/requirements.txt
 
-# Download Go modules
-COPY go.mod go.sum ./
-RUN go mod download
+# Add our code
+ADD . /opt/webapp/
+WORKDIR /opt/webapp
 
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/reference/dockerfile/#copy
-COPY *.go ./
+# Expose is NOT supported by Heroku
+# EXPOSE 5000 		
 
-# Build
-RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
-
-# Optional:
-# To bind to a TCP port, runtime parameters must be supplied to the docker command.
-# But we can document in the Dockerfile what ports
-# the application is going to listen on by default.
-# https://docs.docker.com/reference/dockerfile/#expose
-EXPOSE 8080
-
-# Run
-CMD ["/docker-gs-ping"]
+# Run the app.  CMD is required to run on Heroku
+# $PORT is set by Heroku			
+CMD gunicorn --bind 0.0.0.0:$PORT wsgi
