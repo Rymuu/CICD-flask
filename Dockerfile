@@ -9,14 +9,14 @@ COPY . /opt/webapp/
 WORKDIR /opt/webapp
 
 # Copiez le fichier requirements.txt
-# COPY requirements.txt /tmp/requirements.txt
+COPY requirements.txt /tmp/requirements.txt
 
 # Installez les dépendances dans l'environnement virtuel
 RUN . /opt/venv/bin/activate 
-RUN pip install --no-cache-dir -q -r /opt/webapp/requirements.txt
+RUN pip install --no-cache-dir -q -r /tmp/requirements.txt
 
 # Exposez le port (pas nécessaire pour Heroku)
 # EXPOSE 5000
 
 # Exécutez l'application avec gunicorn
-CMD /opt/venv/bin/gunicorn --bind 0.0.0.0:$PORT main.py
+CMD gunicorn --bind 0.0.0.0:$PORT main.py
