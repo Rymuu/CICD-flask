@@ -19,4 +19,4 @@ RUN pip install --no-cache-dir -q -r /tmp/requirements.txt
 # EXPOSE 5000
 
 # Exécutez l'application avec gunicorn
-CMD gunicorn --bind 0.0.0.0:$PORT main.py
+CMD gunicorn --bind 0.0.0.0:$PORT main:app
