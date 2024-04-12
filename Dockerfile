@@ -12,7 +12,8 @@ WORKDIR /opt/webapp
 # COPY requirements.txt /tmp/requirements.txt
 
 # Installez les dépendances dans l'environnement virtuel
-RUN . /opt/venv/bin/activate && pip install --no-cache-dir -q -r /opt/webapp/requirements.txt
+RUN . /opt/venv/bin/activate 
+RUN pip install --no-cache-dir -q -r /opt/webapp/requirements.txt
 
 # Exposez le port (pas nécessaire pour Heroku)
 # EXPOSE 5000
