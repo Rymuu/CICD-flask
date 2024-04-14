@@ -1,5 +1,5 @@
 # Utilisez une image Python plus récente (3.9-slim-bullseye)
-FROM python:3.9-slim-bullseye
+FROM python:alpine
 
 # Créez un environnement virtuel
 RUN python3 -m venv /opt/venv
