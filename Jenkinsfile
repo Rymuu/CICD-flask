@@ -115,6 +115,7 @@ post {
     always {
       script {
            emailext body: 'Test Message',
+           recipientProviders: [developers(), requestor()],
            subject: 'Test Subject',
            to: '${EMAIL_RECIPIENT}'
       }
