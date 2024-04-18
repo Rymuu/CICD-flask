@@ -111,13 +111,12 @@ pipeline {
         }
      } 
   }
-post {
+     post {
     always {
       script {
-           emailext body: 'Test Message',
-           recipientProviders: [developers(), requestor()],
-           subject: 'Test Subject',
-           to: '${EMAIL_RECIPIENT}'
+           emailext body: "Job ${env.JOB_NAME} with buildnumber ${env.BUILD_NUMBER} ended with result : ${currentBuild.result} ! more info ${env.BUILD_URL}",
+           subject: "Result of ${env.JOB_NAME} build number ${env.BUILD_NUMBER}",
+           to: "${EMAIL_RECIPIENT}"
       }
     }  
   }
