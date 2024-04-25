@@ -15,8 +15,5 @@ COPY requirements.txt /tmp/requirements.txt
 RUN . /opt/venv/bin/activate 
 RUN pip install --no-cache-dir -q -r /tmp/requirements.txt
 
-# Exposez le port (pas nécessaire pour Heroku)
-# EXPOSE 5000
-
 # Exécutez l'application avec gunicorn
 CMD gunicorn --bind 0.0.0.0:$PORT main:app
