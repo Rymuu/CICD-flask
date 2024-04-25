@@ -1,4 +1,4 @@
-# Utilisez une image Python plus récente (3.9-slim-bullseye)
+# Utilisez l'image Python alpine
 FROM python:alpine
 
 # Créez un environnement virtuel
